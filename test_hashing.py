@@ -6,7 +6,6 @@
 
 # Third-party Libraries
 import matplotlib.pyplot as plt
-from IPython.display import Image, display
 
 # Custom libphash bindings
 import pyphash as phash
@@ -39,21 +38,15 @@ def hamming_distance(string1, string2):
     return sum(map(str.__ne__, string1, string2))
 
 
-def test_image_correlations(image_distortion_type, is_ipython_notebook=False):
+def test_image_correlations(image_distortion_type):
     base_image_path = TEST_IMAGES.get('base')
-    base_image = Image(filename=base_image_path)
     base_phash_digest = phash.image_digest(base_image_path)
     base_phash_imagehash = phash.imagehash(base_image_path)
 
-    if is_ipython_notebook:
-        display(base_image)
     print("pHash Digest: {0}".format(base_phash_digest))
     print("pHash DCT Hash: {0}".format(base_phash_imagehash))
 
     for distortion_info, image_path in TEST_IMAGES.get(image_distortion_type).items():
-        _image = Image(filename=image_path)
-        if is_ipython_notebook:
-            display(_image)
         _image_phash_digest = phash.image_digest(image_path)
         _image_phash_imagehash = phash.imagehash(image_path)
         print("pHash Digest: {0}".format(_image_phash_digest))
@@ -87,9 +80,9 @@ def test_rotations():
     return list(zip(*correlations))
 
 if __name__ == "__main__":
-    test_image_correlations('scaled', is_ipython_notebook=False)
-    test_image_correlations('blurs', is_ipython_notebook=False)
-    test_image_correlations('rotations', is_ipython_notebook=False)
+    test_image_correlations('scaled')
+    test_image_correlations('blurs')
+    test_image_correlations('rotations')
     xx, yy = test_rotations()
     plt.plot(xx, yy)
     plt.plot(xx[:10], yy[:10])
