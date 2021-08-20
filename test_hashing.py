@@ -4,9 +4,6 @@
 """ phashlib Core C++ interface
 """
 
-# Third-party Libraries
-import matplotlib.pyplot as plt
-
 # Custom libphash bindings
 import pyphash as phash
 print(phash)
@@ -83,7 +80,3 @@ if __name__ == "__main__":
     test_image_correlations('scaled')
     test_image_correlations('blurs')
     test_image_correlations('rotations')
-    xx, yy = test_rotations()
-    plt.plot(xx, yy)
-    plt.plot(xx[:10], yy[:10])
-    plt.plot(xx[-10:], yy[-10:])
